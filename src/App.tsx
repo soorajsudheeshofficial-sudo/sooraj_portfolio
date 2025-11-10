@@ -1,4 +1,4 @@
-import { HashRouter as Router } from "react-router-dom";
+import { HashRouter, HashRouter as Router } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
@@ -15,7 +15,7 @@ import { Toaster } from "./components/ui/sonner";
 // App content wrapped in Router
 export default function App() {
   return (
-    <Router>
+    <HashRouter>
       <div className="min-h-screen bg-slate-950 text-white relative overflow-hidden">
         {/* Animated background */}
         <div className="fixed inset-0 -z-10">
@@ -43,6 +43,6 @@ export default function App() {
         </main>
         <Toaster />
       </div>
-    </Router>
+    </HashRouter>
   );
 }
