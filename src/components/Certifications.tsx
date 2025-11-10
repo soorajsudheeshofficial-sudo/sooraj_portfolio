@@ -10,7 +10,7 @@ const certifications = [
     organization: "Tamil Nadu Skill Development Corporation",
     date: "May 2025",
     gradient: "from-blue-600 to-blue-700",
-    certificateUrl: "/certificate/NM_Certificate1.pdf",
+    certificateUrl: "/sooraj_portfolio/certificate/NM_Certificate1.pdf",
     skills: [
       "Microsoft Word",
       "Microsoft Excel",
@@ -25,7 +25,7 @@ const certifications = [
     organization: "Tamil Nadu Skill Development Corporation",
     date: "July 2025",
     gradient: "from-cyan-600 to-blue-600",
-    certificateUrl: "/certificate/NM_Certificate2.pdf",
+    certificateUrl: "/sooraj_portfolio/certificate/NM_Certificate2.pdf",
     skills: [
       "Cloud Computing",
       "Cloud Services",
