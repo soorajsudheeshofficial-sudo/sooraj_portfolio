@@ -2,7 +2,7 @@ import { ExternalLink, Code, Eye, Github, Zap } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { useState } from "react";
 
 import userInteractionImg from '../images/user.png';
@@ -25,6 +25,7 @@ const projects = [
     image: userInteractionImg,
     demoUrl: "#",
     githubUrl: "#",
+    liveDemoUrl: "",
     gradient: "from-blue-600 to-cyan-600",
     featured: true
   },
@@ -43,6 +44,7 @@ const projects = [
     image: "https://images.unsplash.com/photo-1727407209320-1fa6ae60ee05?w=800&h=600&fit=crop",
     demoUrl: "https://youtu.be/3RaHH0b9UlM",
     githubUrl: "https://github.com/soorajsudheeshofficial-sudo/DjangoEcommece.git",
+    liveDemoUrl: "https://buyhive-demo.vercel.app",
     gradient: "from-purple-600 to-pink-600",
     featured: true
   },
@@ -63,6 +65,7 @@ const projects = [
     image: loungeCafeImg,
     demoUrl: "https://youtu.be/w5-ZC2tp7PI",
     githubUrl: "https://github.com/soorajsudheeshofficial-sudo/mini_project.git",
+    liveDemoUrl: "https://soorajsudheeshofficial-sudo.github.io/mini_project/",
     gradient: "from-orange-400 to-yellow-300",
     featured: true
   },
@@ -83,6 +86,7 @@ const projects = [
     image: sweetSliceImg,
     demoUrl: "https://youtu.be/OSt_aQXxsT4",
     githubUrl: "https://github.com/soorajsudheeshofficial-sudo/mini_project_django.git",
+    liveDemoUrl: "https://sweetslice-django-demo.vercel.app",
     gradient: "from-pink-600 to-orange-400",
     featured: true
   }
@@ -109,7 +113,6 @@ export function Projects() {
     <section id="projects" className="py-24 lg:py-32 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -129,7 +132,6 @@ export function Projects() {
             </p>
           </motion.div>
 
-          {/* Projects Grid */}
           <div className="space-y-12">
             {projects.map((project, index) => (
               <motion.div
@@ -143,7 +145,6 @@ export function Projects() {
                 className="group"
               >
                 <div className={`grid lg:grid-cols-2 gap-8 items-center ${index % 2 === 1 ? "lg:flex-row-reverse" : ""}`}>
-                  {/* Project Image */}
                   <div className={`relative ${index % 2 === 1 ? "lg:order-2" : ""}`}>
                     <div className="relative rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300">
                       <div className="relative aspect-video bg-slate-900/50 overflow-hidden">
@@ -153,8 +154,6 @@ export function Projects() {
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
                         <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-30 transition-opacity duration-300`}></div>
-
-                        {/* Overlay Buttons (ONLY for non-User Interaction) */}
                         {project.title !== "User Interaction Analysis to Recommend Suitable Jobs" && (
                           <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-slate-950/50 backdrop-blur-sm">
                             <motion.div
@@ -169,7 +168,7 @@ export function Projects() {
                               >
                                 <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
                                   <Eye className="mr-2 h-4 w-4" />
-                                  View Demo
+                                  Video Demo
                                 </a>
                               </Button>
                             </motion.div>
@@ -188,22 +187,23 @@ export function Projects() {
                                 </a>
                               </Button>
                             </motion.div>
-                            <motion.div
-                              initial={{ scale: 0 }}
-                              animate={{ scale: hoveredIndex === index ? 1 : 0 }}
-                              transition={{ duration: 0.3, delay: 0.2 }}
-                            >
-                              <Button
-                                variant="ghost"
-                                className="text-slate-400 hover:text-white"
-                                asChild
+                            {project.liveDemoUrl && (
+                              <motion.div
+                                initial={{ scale: 0 }}
+                                animate={{ scale: hoveredIndex === index ? 1 : 0 }}
+                                transition={{ duration: 0.3, delay: 0.2 }}
                               >
-                                <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-                                  Learn More
-                                  <ExternalLink className="ml-2 h-4 w-4" />
-                                </a>
-                              </Button>
-                            </motion.div>
+                                <Button
+                                  className="bg-green-500 text-white border-none hover:bg-green-700 transition-colors"
+                                  asChild
+                                >
+                                  <a href={project.liveDemoUrl} target="_blank" rel="noopener noreferrer">
+                                    <ExternalLink className="mr-2 h-4 w-4" />
+                                    Live Demo
+                                  </a>
+                                </Button>
+                              </motion.div>
+                            )}
                           </div>
                         )}
                       </div>
@@ -217,7 +217,6 @@ export function Projects() {
                     <div className={`absolute -inset-1 bg-gradient-to-r ${project.gradient} rounded-2xl blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10`}></div>
                   </div>
 
-                  {/* Project Details */}
                   <div className={`space-y-6 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
                     <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full mb-4 border border-white/20 ${badgeStyles[project.tag] || ''}`}>
                       <Code className="h-4 w-4" />
@@ -227,7 +226,6 @@ export function Projects() {
                       {project.title}
                     </h3>
                     <p className="text-slate-300 leading-relaxed">{project.description}</p>
-
                     <div>
                       <h4 className="text-sm text-slate-400 mb-3">Technologies Used</h4>
                       <div className="flex flex-wrap gap-2">
@@ -242,7 +240,6 @@ export function Projects() {
                         ))}
                       </div>
                     </div>
-
                     <div>
                       <h4 className="text-sm text-slate-400 mb-3">Key Features</h4>
                       <ul
@@ -268,8 +265,6 @@ export function Projects() {
                         ))}
                       </ul>
                     </div>
-
-                    {/* Bottom Buttons (ONLY for non-User Interaction) */}
                     {project.title !== "User Interaction Analysis to Recommend Suitable Jobs" && (
                       <div className="flex flex-wrap gap-4 pt-4">
                         <Button
@@ -279,7 +274,7 @@ export function Projects() {
                         >
                           <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
                             <Eye className="mr-2 h-4 w-4" />
-                            View Demo
+                            Video Demo
                           </a>
                         </Button>
                         <Button
@@ -291,16 +286,17 @@ export function Projects() {
                             Source Code
                           </a>
                         </Button>
-                        <Button
-                          variant="ghost"
-                          className="text-slate-400 hover:text-white"
-                          asChild
-                        >
-                          <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-                            Learn More
-                            <ExternalLink className="ml-2 h-4 w-4" />
-                          </a>
-                        </Button>
+                        {project.liveDemoUrl && (
+                          <Button
+                            className="bg-green-500 text-white border-none hover:bg-green-700 transition-colors"
+                            asChild
+                          >
+                            <a href={project.liveDemoUrl} target="_blank" rel="noopener noreferrer">
+                              <ExternalLink className="mr-2 h-4 w-4" />
+                              Live Demo
+                            </a>
+                          </Button>
+                        )}
                       </div>
                     )}
                   </div>
