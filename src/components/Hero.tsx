@@ -164,7 +164,7 @@ export function Hero() {
                   className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 shadow-lg shadow-blue-500/50"
                   asChild
                 >
-                  <a href="/sooraj_portfolio/resume.pdf" download>
+                  <a href="/sooraj_portfolio/CV.pdf" download>
                     <Download className="mr-2 h-4 w-4" />
                     Download CV
                   </a>
